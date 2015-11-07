@@ -1,0 +1,66 @@
+!!! 5
+%html
+  %head
+    %title Archives #{controller.class}: #{controller.action_name}
+    = javascript_include_tag "application"
+    = javascript_include_tag '//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js'
+    = stylesheet_link_tag '//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css'
+    = stylesheet_link_tag '//netdna.bootstrapcdn.com/bootswatch/3.0.3/spacelab/bootstrap.min.css'
+    = stylesheet_link_tag '//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css'    
+    = stylesheet_link_tag 'http://fonts.googleapis.com/css?family=Ubuntu', :rel => 'stylesheet', :type => 'text/css'
+    = stylesheet_link_tag "application", :media => "all"
+    = favicon_link_tag
+    = csrf_meta_tags
+
+  %body
+
+    .navbar.navbar-default.navbar-fixed-top.navbar-inverse{role: "navigation"}
+      .container
+        .navbar-header
+          %button.navbar-toggle{data: {toggle: "collapse", target: ".navbar-collapse"}}
+            %span.sr-only Toggle navigation
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+          = link_to root_path, class: 'navbar-brand' do
+            %i.fa.fa-home
+            Archives
+        .navbar-collapse.collapse
+          %ul.nav.navbar-nav
+            %li
+              = link_to admin_root_path do
+                %i.fa.fa-dashboard
+                Dashboard
+            %li
+              = link_to services_path do
+                %i.fa.fa-suitcase
+                Services
+            %li
+              = link_to speakers_path do
+                %i.fa.fa-users
+                Speakers
+            %li
+              = link_to recordings_path do
+                %i.fa.fa-volume-up
+                Recordings
+            %li
+              = link_to services_problems_path do
+                %i.fa.fa-exclamation
+                Problems
+            %li
+              = link_to services_statistics_path do
+                %i.fa.fa-signal
+                Statistics
+
+          %ul.nav.navbar-nav.navbar-right
+            %li
+              = link_to services_search_path do
+                %i.fa.fa-search
+                Search
+        
+    = flash[:notice]
+
+    = yield
+
+    %footer.navbar.navbar-bottom
+      %p.pull-right Copyright &copy; 2010, David Krider

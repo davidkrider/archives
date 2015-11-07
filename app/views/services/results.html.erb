@@ -1,0 +1,15 @@
+<h1>Search results (<%= @services.count %>)</h1>
+
+<table>
+  <tr><th>Date<th>Title<th>Speaker(s)<th>Recording(s)
+  </tr>
+
+<% @services.each do |service| %>
+  <tr>
+		<td><%= preferred_date_format(service.date_of_service) %></td>
+		<td><%= link_to service.title, service %></td>
+		<td><%= service.speakers.map { |sp| link_to sp.proper_name, sp }.join('<br/>') %></td>
+		<td><%= service.recordings.map { |r| link_to r.id, r }.join('<br/>') %></td>
+  </tr>
+<% end %>
+</table>

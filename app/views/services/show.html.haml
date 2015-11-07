@@ -1,0 +1,18 @@
+%h1 Service
+
+%table
+  %tr
+    %th Date
+    %td= preferred_date_format(@service.date_of_service)
+  %tr
+    %th Title
+    %td= @service.title
+  %tr
+    %th Kind
+    %td= @service.kind.designation unless @service.kind.nil?
+  %tr
+    %th Speaker(s)
+    %td= @service.speakers.collect { |sp| link_to sp.full_name, speaker_path(sp) }.to_sentence.html_safe
+  %tr
+    %th Recording(s)
+    %td= @service.recordings.map { |r| link_to r.filename, r }.join('<br/>').html_safe

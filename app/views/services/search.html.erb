@@ -1,0 +1,15 @@
+<h1>Searching services</h1>
+
+<% form_for :services, :url => { :action => :results } do |f| %>
+  <table>
+    <tr><th>Title<td><%= f.text_field :title %></tr>
+    <tr><th>Speaker<td><%= f.collection_select :speaker_id, @speakers,
+      :id, :proper_name, :include_blank => true %></tr>
+    <tr><th>Kind<td><%= f.collection_select :kind_id, Kind.all, :id,
+      :designation, :include_blank => true %></tr>
+  </table>
+
+  <p>
+		<%= f.submit 'Search', :class => "fg-button ui-state-default ui-corner-all" %>
+	</p>
+<% end %>

@@ -1,0 +1,47 @@
+%h1 Services with Metadata Problems
+
+- unless @no_speakers.count == 0
+  %h2 No Speakers (#{@no_speakers.count})
+  %table.table
+    %tr
+      %th Date of Service
+      %th Title
+    - @no_speakers.each do |service|
+      %tr
+        %td= link_to preferred_date_format(service.date_of_service), edit_service_path(service)
+        %td= service.title
+
+- unless @no_titles.count == 0
+  %h2 No Titles (#{@no_titles.count})
+  %table.table
+    %tr
+      %th Date of Service
+      %th Speaker(s)
+    - @no_titles.each do |service|
+      %tr
+        %td= link_to preferred_date_format(service.date_of_service), edit_service_path(service)
+        %td= service.speakers.map { |sp| sp.proper_name }.to_sentence
+
+- unless @neither.count == 0
+  %h2 No Speakers or Title (#{@neither.count})
+  %table.table
+    %tr
+      %th Date of Service
+      %th Recording(s)?
+    - @neither.each do |service|
+      %tr
+        %td= link_to preferred_date_format(service.date_of_service), edit_service_path(service)
+        %td= service.recordings.count
+
+- unless @off_days.count == 0
+  %h2 Services on "Off" Days (#{@off_days.count})
+  %table.table
+    %tr
+      %th Date of Service
+      %th Speaker(s)
+      %th Title
+    - @off_days.each do |service|
+      %tr
+        %td= link_to preferred_date_format(service.date_of_service), edit_service_path(service)
+        %td= service.speakers.collect { |sp| link_to sp.full_name, admin_speaker_path(sp) }.to_sentence.html_safe
+        %td= service.title

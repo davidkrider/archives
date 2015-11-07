@@ -1,0 +1,21 @@
+.nav{style: "width: 90%; margin-right: auto; margin-left: auto; padding: 10px;"}
+  - @years.each do |y|
+    %span.badge
+      = Service.year(y).count
+      = link_to y, { :controller => 'recordings', :action => 'index', :year => y }
+
+%h1 Recordings
+
+%table.table.table-striped.table-bordered.table-hover
+  %thead
+    %th Service
+    %th Filename
+    %th Plot
+  %tbody
+    - @recordings.each do |recording|
+      %tr
+        %td= link_to recording.service.date_of_service, recording.service
+        %td= link_to recording.filename, recording
+        %td
+          %a{href: recording.linky}
+            %img{src: recording.ploty, width: 100, height: 50, border: 1}

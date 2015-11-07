@@ -1,0 +1,12 @@
+%h1 Recording
+
+%table
+  %tr
+    %th Service
+    %td= link_to @recording.service.date_of_service, @recording.service
+  %tr
+    %th File
+    %td= link_to @recording.filename, @recording.linky
+  %tr
+    %th Plot
+    %td <img src="#{@recording.ploty}">

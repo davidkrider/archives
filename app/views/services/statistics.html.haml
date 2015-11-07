@@ -1,0 +1,36 @@
+%h1 Service Statistics
+
+%table.table.table-striped.table-bordered.table-hover
+	%thead
+		%th Year
+		%th Services
+		%th Recordings
+		%th Multiple
+		%th Missing
+		%th Complete
+	%tbody
+		- count_s = count_r = count_m = count_x = 0
+		- @years.each do |y|
+			- services = Service.year(y); count_s += services.count
+			- recordings = Recording.year(y); count_r += recordings.count
+			- multiples = services.select { |s| s.recordings.count > 1 }; count_m += multiples.count
+			- missings = services.select { |s| s.recordings.count == 0 }; count_x += missings.count
+			%tr
+				%td= link_to y, { :controller => 'services', :action => 'index', :year => y }
+				%td= services.count
+				%td= recordings.count - multiples.count
+				%td= multiples.count
+				%td= missings.count
+				%td
+					= ((services.count - missings.count) / services.count.to_f * 100).round
+					\%
+			= " | " unless y = @years.last
+	%tfoot
+		%th
+		%th= count_s
+		%th= count_r - count_m
+		%th= count_m
+		%th= count_x
+		%th
+			= (((count_s - count_x) / count_s.to_f) * 100).round
+			\%

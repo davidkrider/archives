@@ -1,0 +1,24 @@
+%h1 Speakers
+
+%table.table.table-striped.table-bordered.table-hover
+  %thead
+    %th Salutation
+    %th First Name
+    %th Last Name
+    %th Service Count
+  %tbody
+    - @speakers.sort! { |a, b| b.services.count <=> a.services.count }
+    - @speakers.each do |speaker|
+      %tr
+        %td= speaker.salutation.designation
+        %td= speaker.first_name
+        %td= link_to speaker.last_name, speaker
+        %td= link_to Service.speaker(speaker.id).count, :controller => 'services', :speaker => speaker.id
+
+:javascript
+  $(document).ready(function() {
+    $('#speakers').dataTable({
+        "bJQueryUI": true,
+        "sPaginationType": "full_numbers"
+      });
+  }); 
