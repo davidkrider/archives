@@ -7,8 +7,8 @@ development:
   adapter: mysql2
   encoding: utf8
   database: archives_dev
-  username: root
-  password:
+  username: archives
+  password: archives
   host: localhost
 
 # Warning: The database defined as "test" will be erased and
@@ -21,7 +21,9 @@ test:
   timeout: 5000
 
 production:
-  adapter: sqlite3
-  database: db/production.sqlite3
-  pool: 5
-  timeout: 5000
+  adapter: mysql2
+  encoding: utf8
+  database: archives_prd
+  username: archives
+  password: archives
+  host: localhost
