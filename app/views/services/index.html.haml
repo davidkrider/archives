@@ -19,7 +19,7 @@
               %td= service.speakers.collect { |sp| link_to sp.full_name, speaker_path(sp) }.to_sentence.html_safe
               %td
                 - service.recordings.each do |r|
-                  %a{href: r.linky}
+                  %a{href: asset_path(r.linky)}
                     %img{src: r.ploty, width: 100, height: 50, border: 1}
     .col-md-3
       %h3 Jump to Year

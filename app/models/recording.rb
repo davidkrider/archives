@@ -14,7 +14,7 @@ class Recording < ActiveRecord::Base
 	end
 
 	def linky
-		"/images/#{service.date_of_service.year}/#{filename}"
+		"/recordings/#{service.date_of_service.year}/#{filename}"
 	end
 
 	def ploty
